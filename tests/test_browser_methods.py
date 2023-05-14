@@ -1,8 +1,3 @@
-
-
-image_1 = None
-
-
 def test_is_search_area(browser):
     browser.open()
     browser.is_captcha()
@@ -47,3 +42,6 @@ def test_back_to_previous_iamge(browser):
     browser.previous_image()
     image_3 = browser.get_image_url()
     assert browser.compare_images(image_1, image_3) is True
+
+
+image_1 = None
