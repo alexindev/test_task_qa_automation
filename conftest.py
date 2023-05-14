@@ -1,8 +1,8 @@
 import pytest
-from browser_methods import Browser
+import undetected_chromedriver as uc
 
 @pytest.fixture()
 def browser():
-    browser = Browser()
-    yield browser
-    browser.driver.quit()
+    driver = uc.Chrome()
+    yield driver
+    driver.quit()
