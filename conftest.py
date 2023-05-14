@@ -1,8 +1,12 @@
 import pytest
 import undetected_chromedriver as uc
 
-@pytest.fixture()
+from pages.actions_page import ActionsPage
+
+
+@pytest.fixture(scope='session')
 def browser():
     driver = uc.Chrome()
-    yield driver
+    page = ActionsPage(driver, 'https://ya.ru')
+    yield page
     driver.quit()

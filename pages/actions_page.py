@@ -11,11 +11,24 @@ class ActionsPage(Base):
     def is_captcha(self) -> None:
         """ Проверка наличия капчи """
         try:
-            captcha = self.element_visibility_located(Locators.CAPTCHA_BUTTON, 5)
+            captcha = self.element_visibility_located(Locators.CAPTCHA_BUTTON, 10)
             captcha.click()
             logger.info('Появилось окно капчи')
         except TimeoutException:
             logger.info('Без капчи')
+
+    def is_search_area(self) -> bool:
+        """Проверка строки поиска"""
+        try:
+            self.element_presence_located(Locators.SEARCH_AREA, 10)
+            logger.success('Строка поиска появилась')
+            return True
+        except TimeoutException:
+            logger.error('Не нашел строку поиска')
+            return False
+        except Exception as e:
+            logger.error(e)
+            return False
 
     def is_suggest(self, text: str) -> bool:
         """ Проверка окна подсказок в поиске """
@@ -28,6 +41,9 @@ class ActionsPage(Base):
             return True
         except TimeoutException:
             logger.error('Окно с подсказками не появилось')
+            return False
+        except Exception as e:
+            logger.error(e)
             return False
 
     def is_search_result(self) -> bool:
